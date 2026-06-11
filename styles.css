@@ -179,7 +179,7 @@ p {
   inset: 0;
   background:
     linear-gradient(120deg, rgba(20, 18, 16, 0.72), rgba(20, 18, 16, 0.35)),
-    url("assets/images/hero.jpg") center / cover no-repeat;
+    url("assets/images/final_images/img-000.png") center / cover no-repeat;
 }
 
 .hero-content {
@@ -312,8 +312,45 @@ p {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
+}
+
+.swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.swatch {
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.gallery-grid figure {
+  margin: 0;
+}
+
+.gallery-grid figcaption {
+  padding: 0.65rem 0.25rem 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.contact-layout {
+  grid-template-columns: 1fr;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.contact-intro {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .product-card {
@@ -343,41 +380,6 @@ p {
   margin: 0 !important;
 }
 
-.catalog-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-}
-
-.catalog-group {
-  background: var(--surface);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(31, 28, 26, 0.06);
-}
-
-.catalog-group h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--accent-dark);
-}
-
-.catalog-group ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.catalog-group li {
-  padding: 0.35rem 0;
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-}
-
-.catalog-group li:last-child {
-  border-bottom: 0;
-}
 
 .gallery-grid {
   display: grid;
@@ -497,8 +499,7 @@ p {
 
 @media (max-width: 960px) {
   .stats-grid,
-  .product-grid,
-  .catalog-grid {
+  .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -545,7 +546,6 @@ p {
 
   .stats-grid,
   .product-grid,
-  .catalog-grid,
   .gallery-grid {
     grid-template-columns: 1fr;
   }

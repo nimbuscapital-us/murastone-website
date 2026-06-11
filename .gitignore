@@ -1,2 +1,7 @@
 # Local PDF extraction tools (not needed for the live site)
 tools/
+
+# Old placeholder images (replaced by final_images)
+assets/images/brochure/
+assets/images/*.jpg
+assets/images/pdf-image-list.txt

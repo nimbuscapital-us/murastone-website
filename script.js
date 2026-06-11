@@ -3,6 +3,9 @@ const siteNav = document.querySelector(".site-nav");
 const form = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 const yearEl = document.getElementById("year");
+const productGrid = document.getElementById("product-grid");
+const galleryGrid = document.getElementById("gallery-grid");
+const interestSelect = document.getElementById("interest");
 
 yearEl.textContent = new Date().getFullYear();
 
@@ -18,25 +21,63 @@ siteNav.querySelectorAll("a").forEach((link) => {
   });
 });
 
+function renderProducts() {
+  productGrid.innerHTML = STONE_PRODUCTS.map((product) => {
+    const swatches = product.swatches
+      .map(
+        (swatch) =>
+          `<img class="swatch" src="${swatch.image}" alt="${product.name} — ${swatch.label}" title="${swatch.label}" loading="lazy">`
+      )
+      .join("");
+
+    return `
+      <article class="product-card">
+        <img src="${product.image}" alt="${product.name} flexible soft stone panel" loading="lazy">
+        <div class="product-body">
+          <h3>${product.name}</h3>
+          <p class="product-meta">Sizes: ${product.sizes} · ${product.thickness} thick</p>
+          <div class="swatch-row">${swatches}</div>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  interestSelect.innerHTML = `
+    <option value="">Select a product</option>
+    ${STONE_PRODUCTS.map((p) => `<option value="${p.name}">${p.name}</option>`).join("")}
+    <option value="Full Catalog">Full Catalog</option>
+    <option value="Other">Other / Not Sure</option>
+  `;
+}
+
+function renderGallery() {
+  galleryGrid.innerHTML = GALLERY_IMAGES.map(
+    (item) => `
+      <figure>
+        <img src="${item.image}" alt="${item.label}" loading="lazy">
+        <figcaption>${item.label}</figcaption>
+      </figure>
+    `
+  ).join("");
+}
+
+renderProducts();
+renderGallery();
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
-
-  const action = form.getAttribute("action") || "";
-  if (action.includes("YOUR_FORM_ID")) {
-    formStatus.textContent =
-      "Form is not connected yet. Replace YOUR_FORM_ID in index.html with your Formspree form ID.";
-    formStatus.className = "form-note error";
-    return;
-  }
 
   formStatus.textContent = "Sending...";
   formStatus.className = "form-note";
 
   try {
-    const response = await fetch(action, {
+    const response = await fetch("https://formsubmit.co/ajax/thepotterpad@gmail.com", {
       method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
     });
 
     if (response.ok) {
@@ -48,7 +89,7 @@ form.addEventListener("submit", async (event) => {
 
     throw new Error("Request failed");
   } catch {
-    formStatus.textContent = "Something went wrong. Please try again or email us directly.";
+    formStatus.textContent = "Something went wrong. Please try again.";
     formStatus.className = "form-note error";
   }
 });
