@@ -98,7 +98,7 @@ const STONE_PRODUCTS = [
     thickness: "3–5 mm",
     swatches: [
       { label: "Dark Grey", image: "assets/images/final_images/img-202.png" },
-      { label: "Claybank", image: "assets/images/final_images/img-203.jpg" },
+      { label: "Claybank", image: "assets/images/final_images/img-203.png" },
     ],
   },
   {
